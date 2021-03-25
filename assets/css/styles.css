@@ -8,6 +8,9 @@
  *
 */
 
+/* Google fonts */
+@import url(https://fonts.googleapis.com/css?family=Fira+Sans:900|Merriweather&display=swap);
+
 
 /* ---- Base Rules ---- */
 body {
@@ -17,7 +20,6 @@ body {
     font-family: 'Merriweather', serif;
     color: #fff;
 }
-
 
 /* Typeography General*/
 h1 {
@@ -64,17 +66,17 @@ section {
 /* ---- Module Rules ---- */
 
 /* Navigation Styles*/
-.navbar__menu ul {
+.navbar_menu ul {
     padding-left: 0;
     margin: 0;
     text-align: right;
 }
 
-.navbar__menu li {
+.navbar_menu li {
     display: inline-block;
 }
 
-.navbar__menu .menu__link {
+.navbar_menu .menu_link {
     display: block;
     padding: 1em;
     font-weight: bold;
@@ -82,14 +84,14 @@ section {
     color: #000;
 }
 
-.navbar__menu .menu__link:hover {
+.navbar_menu .menu_link:hover {
     background: #333;
     color: #fff;
     transition: ease 0.3s all;
 }
 
 /* Header Styles */
-.page__header {
+.page_header {
     background: #fff;
     position: fixed;
     top: 0;
@@ -98,32 +100,32 @@ section {
 }
 
 /* Footer Styles */
-.page__footer {
+.page_footer {
     background: #000;
     padding: 3em;
     color: #fff;
 }
 
-.page__footer p{
+.page_footer p{
     color: #fff;
 }
 
 
 /* ---- Theme Rules ---- */
 /* Landing Container Styles */
-.landing__container {
+.landing_container {
     padding: 1em;
     text-align: left;
 }
 
 @media only screen and (min-width: 35em){
-    .landing__container {
+    .landing_container {
         max-width: 50em;
         padding: 4em;
     }
 }
 
-section:nth-of-type(even) .landing__container {
+section:nth-of-type(even) .landing_container {
     margin-right: 0;
     margin-left: auto;
     text-align: right; 
@@ -132,7 +134,7 @@ section:nth-of-type(even) .landing__container {
 /* Background Circles */
 /* Note that background circles are created with psuedo elements before and after */
 /* Circles appear to be random do to use of :nth-of-type psuedo class */
-section:nth-of-type(odd) .landing__container::before {
+section:nth-of-type(odd) .landing_container::before {
     content: '';
     background: rgba(255, 255, 255, 0.187);
     position: absolute;
@@ -144,7 +146,7 @@ section:nth-of-type(odd) .landing__container::before {
     transition: ease 0.5s all;
 }
 
-section:nth-of-type(even) .landing__container::before {
+section:nth-of-type(even) .landing_container::before {
     content: '';
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
@@ -159,7 +161,7 @@ section:nth-of-type(even) .landing__container::before {
     transition: ease 0.5s all;
 }
 
-section:nth-of-type(3n) .landing__container::after {
+section:nth-of-type(3n) .landing_container::after {
     content: '';
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
@@ -174,7 +176,7 @@ section:nth-of-type(3n) .landing__container::after {
     transition: ease 0.5s all;
 }
 
-section:nth-of-type(3n + 1) .landing__container::after {
+section:nth-of-type(3n + 1) .landing_container::after {
     content: '';
     background: rgb(255,255,255);
     background: linear-gradient(0deg, rgba(255,255,255,.1) 0%, rgba(255,255,255,.2) 100%);
@@ -192,18 +194,25 @@ section:nth-of-type(3n + 1) .landing__container::after {
 
 /* ---- Theme State Rules ---- */
 /* Section Active Styles */
-/* Note: your-active-class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
-section.your-active-class {
+/* Note: active_class class is applied through javascript. You should update the class here and in the index.html to what you set in your javascript file.  */
+
+/* add active class for li elements */
+.active {
+    background: #333;
+    color: #fff;
+ }
+
+section.active_class {
     background: rgb(0, 0, 0);
     background: linear-gradient(0deg, rgba(0, 0, 0, 0.1) 0%, rgba(0, 0, 0, 0) 100%);
 }
 
-section.your-active-class .landing__container::before {
+section.active_class .landing_container::before {
     opacity: 1;
     animation: rotate 4s linear 0s infinite forwards;
 }
 
-section.your-active-class .landing__container::after {
+section.active_class .landing_container::after {
     opacity: 1;
     animation: rotate 5s linear 0s infinite forwards reverse;
 }
