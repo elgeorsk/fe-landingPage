@@ -94,14 +94,15 @@ for (let section = 0; section < sections.length; section++){
 
 /* When the user scrolls down, hide the navbar */
 let timeoutNavbar = null;
-
 window.addEventListener('scroll', function() {
-
-    if(timeoutNavbar !== null){
+    if(window.scrollY == 0){
         displayBlock();
+    } else {
+        if(timeoutNavbar != null){
+            displayBlock();
+        }
+        timeoutNavbar = setTimeout(displayNone, 5000);
     }
-    timeoutNavbar = setTimeout(displayNone, 5000);
-
 }, false);
 
 
