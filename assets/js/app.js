@@ -91,6 +91,29 @@ for (let section = 0; section < sections.length; section++){
 
 }
 
+
+/* When the user scrolls down, hide the navbar */
+let timeoutNavbar = null;
+
+window.addEventListener('scroll', function() {
+
+    if(timeoutNavbar !== null){
+        displayBlock();
+    }
+    timeoutNavbar = setTimeout(displayNone, 5000);
+
+}, false);
+
+
+function displayNone() {
+    menu.style.display = "none";
+}
+
+function displayBlock() {
+    clearTimeout(timeoutNavbar);
+    menu.style.display = "block";
+}
+
 // Add class 'active' to section when near top of viewport
 
 
