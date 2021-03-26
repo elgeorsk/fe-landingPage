@@ -21,7 +21,9 @@
 let sections = document.querySelectorAll('section');
 let menu = document.getElementById('navbar_list');
 let active = sections[0];
-let prActive;
+//prActive keep the previous active section
+// clicked keep the previous clicked section
+let menuItem, prActive, prClicked, clicked;
 
 /**
  * End Global Variables
@@ -55,16 +57,30 @@ for (let section = 0; section < sections.length; section++){
 
     menu.appendChild(liElement).appendChild(aElement);
 
+
     // Scroll to anchor ID using scrollTO event
     aElement.addEventListener("click", function (e) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
         e.preventDefault();
 
+        menuItem = menu.querySelectorAll('a');
+
         // add active-class to section
+        if(prClicked == null){
+            prClicked = section;
+        } else {
+            prClicked = clicked;
+        }
+
         prActive = active;
+
+        menuItem[prClicked].classList.remove('active');
         prActive.classList.remove('active_class');
+
+        clicked = section;
         active = sections[section];
 
+        menuItem[clicked].classList.add('active');
         active.classList.add('active_class');
 
         // this refers to aElement
@@ -72,6 +88,7 @@ for (let section = 0; section < sections.length; section++){
             behavior: "smooth",
         });
     });
+
 }
 
 // Add class 'active' to section when near top of viewport
