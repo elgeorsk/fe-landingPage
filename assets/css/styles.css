@@ -119,10 +119,19 @@ section {
     text-align: left;
 }
 
-@media only screen and (min-width: 35em){
+@media only screen and (max-width: 900px), only screen and (max-height: 700px){
+     h1 {
+        margin: 0;
+     }
+
     .landing_container {
         max-width: 50em;
-        padding: 4em;
+        padding: 1em;
+        margin-bottom: 1em;
+    }
+
+    .page_footer {
+        padding: 1em;
     }
 }
 
@@ -200,6 +209,7 @@ section:nth-of-type(3n + 1) .landing_container::after {
 /* add active class for li elements */
 .menu_link.active{
     background: #333;
+    text-decoration: underline;
     color: #fff;
 }
 

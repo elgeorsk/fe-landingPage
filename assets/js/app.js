@@ -25,20 +25,6 @@ let active = sections[0];
 // clicked keep the previous clicked section
 let menuItem, prActive, prClicked, clicked;
 
-/**
- * End Global Variables
- * Start Helper Functions
- * 
-*/
-
-
-
-/**
- * End Helper Functions
- * Begin Main Functions
- * 
-*/
-
 // build the nav
 // using for-in loop, i had an error in the console 'getAttribute is not a function'
 // solution - https://stackoverflow.com/questions/40835675/why-does-chrome-throw-getattribute-is-not-a-function-error-inside-a-for-loop
@@ -50,7 +36,7 @@ for (let section = 0; section < sections.length; section++){
     aElement.href = '#'+ sections[section].id;
 
     // set class
-    aElement.classList.add("menu_link");
+    aElement.classList.add('menu_link');
 
     // set text value
     aElement.appendChild(document.createTextNode(sections[section].getAttribute('data-nav')));
@@ -59,7 +45,7 @@ for (let section = 0; section < sections.length; section++){
 
 
     // Scroll to anchor ID using scrollTO event
-    aElement.addEventListener("click", function (e) {
+    aElement.addEventListener('click', function (e) {
         // https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault
         e.preventDefault();
 
@@ -74,25 +60,24 @@ for (let section = 0; section < sections.length; section++){
 
         prActive = active;
 
-        menuItem[prClicked].classList.remove('active');
-        prActive.classList.remove('active_class');
+        removeActive(menuItem[prClicked], 'active');
+        removeActive(prActive, 'active_class');
 
         clicked = section;
         active = sections[section];
 
-        menuItem[clicked].classList.add('active');
-        active.classList.add('active_class');
+        addActive(menuItem[clicked], 'active');
+        addActive(active, 'active_class');
 
         // this refers to aElement
         document.querySelector(this.getAttribute('href')).scrollIntoView({
-            behavior: "smooth",
+            behavior: 'smooth',
         });
     });
 
 }
 
-
-/* When the user scrolls down, hide the navbar */
+/* When the user scrolls, hide the navbar */
 let timeoutNavbar = null;
 window.addEventListener('scroll', function() {
     if(window.scrollY == 0){
@@ -103,31 +88,27 @@ window.addEventListener('scroll', function() {
         }
         timeoutNavbar = setTimeout(displayNone, 5000);
     }
+
+    let currentPos = window.scrollY;
+
 }, false);
 
 
+function addActive(element, classTxt){
+    element.classList.add(String(classTxt));
+}
+
+function removeActive(element, classTxt){
+    element.classList.remove(String(classTxt));
+}
+
 function displayNone() {
-    menu.style.display = "none";
+    menu.style.display = 'none';
 }
 
 function displayBlock() {
     clearTimeout(timeoutNavbar);
-    menu.style.display = "block";
+    menu.style.display = 'block';
 }
 
 // Add class 'active' to section when near top of viewport
-
-
-/**
- * End Main Functions
- * Begin Events
- * 
-*/
-
-// Build menu 
-
-// Scroll to section on link click
-
-// Set sections as active
-
-
