@@ -13,14 +13,10 @@
  * 
 */
 
-/**
- * Define Global Variables
- * 
-*/
-
 let sections = document.querySelectorAll('section');
 let menu = document.getElementById('navbar_list');
 let active = sections[0];
+let sectionsPos;
 //prActive keep the previous active section
 // clicked keep the previous clicked section
 let menuItem, prActive, prClicked, clicked;
@@ -51,7 +47,7 @@ for (let section = 0; section < sections.length; section++){
 
         menuItem = menu.querySelectorAll('a');
 
-        // add active-class to section
+        // add active class to section
         if(prClicked == null){
             prClicked = section;
         } else {
@@ -77,22 +73,58 @@ for (let section = 0; section < sections.length; section++){
 
 }
 
-/* When the user scrolls, hide the navbar */
+
 let timeoutNavbar = null;
 window.addEventListener('scroll', function() {
+    // When the user scrolls, hide the navbar
     if(window.scrollY == 0){
         displayBlock();
     } else {
         if(timeoutNavbar != null){
             displayBlock();
         }
-        timeoutNavbar = setTimeout(displayNone, 5000);
+
+        timeoutNavbar = setTimeout(displayNone, 8000);
     }
 
-    let currentPos = window.scrollY;
+    // Add class 'active' to section when near top of viewport
+    sectionsPos = [];
+    sections.forEach(getSectionPosition);
+    menuItem = menu.querySelectorAll('a');
+    let prPos = 0;
+
+    for(pos in sectionsPos){
+        // check if window.scrollY (scrollbar) is in-between the active section
+        if (sectionsPos[pos].bottomSec > window.scrollY  && window.scrollY > sectionsPos[pos].topSec){
+            addActive(menuItem[pos], 'active');
+            addActive(sections[pos], 'active_class');
+        // check if navbar is near to next/previous section
+        } else if (sectionsPos[pos].bottomSec < window.scrollY || sectionsPos[pos].topSec > window.scrollY){
+            prPos = pos;
+            removeActive(menuItem[prPos], 'active');
+            removeActive(sections[prPos], 'active_class');
+        }
+    }
 
 }, false);
 
+// add scroll to the top
+let topBtn = document.getElementById('topBtn');
+topBtn.addEventListener('click', function (e) {
+    e.preventDefault();
+    window.scrollTo({
+      top: 0,
+      left: 0,
+      behavior: 'smooth'
+    });
+});
+
+
+//get section position in the page
+function getSectionPosition(section, index){
+    sectionsPos.push({topSec: Math.floor(sections[index].getBoundingClientRect().top + window.scrollY - 100),
+                      bottomSec: Math.floor(sections[index].getBoundingClientRect().bottom + window.scrollY - 100)});
+}
 
 function addActive(element, classTxt){
     element.classList.add(String(classTxt));
@@ -110,5 +142,3 @@ function displayBlock() {
     clearTimeout(timeoutNavbar);
     menu.style.display = 'block';
 }
-
-// Add class 'active' to section when near top of viewport

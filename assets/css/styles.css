@@ -119,6 +119,11 @@ section {
     text-align: left;
 }
 
+/* topBtn hidden in desktop version */
+#topBtn {
+    display: none;
+}
+
 @media only screen and (max-width: 900px), only screen and (max-height: 700px){
      h1 {
         margin: 0;
@@ -133,12 +138,32 @@ section {
     .page_footer {
         padding: 1em;
     }
+
+    /* topBtn css on mobile version */
+    #topBtn {
+        display: block;
+        bottom: 10px;
+        right: 20px;
+        position: fixed;
+        z-index: 3000;
+        opacity: 0.5;
+        font-size: 40px;
+        padding: 5px;
+    }
+
+    #topBtn:hover {
+        border-radius: 20px;
+        padding: 5px;
+        color: #000;
+        opacity: 1;
+        background: #fff;
+    }
 }
 
 section:nth-of-type(even) .landing_container {
     margin-right: 0;
     margin-left: auto;
-    text-align: right; 
+    text-align: right;
 }
 
 /* Background Circles */
