@@ -125,6 +125,11 @@ section {
 }
 
 @media only screen and (max-width: 900px), only screen and (max-height: 700px){
+     .navbar_menu li {
+        display: table-cell;
+        font-size: 0.75em;
+     }
+
      h1 {
         margin: 0;
      }
